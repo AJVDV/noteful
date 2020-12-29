@@ -16,8 +16,9 @@ export default class NoteListNav extends React.Component {
 
         <ul className='NoteListNav__list'>
           {folders.map(folder =>
-            <li key={folder.id}>
+            <li key={folder.name}>
               <NavLink
+                key={folder.id}
                 className='NoteListNav__folder-link'
                 to={`/folder/${folder.id}`}
               >

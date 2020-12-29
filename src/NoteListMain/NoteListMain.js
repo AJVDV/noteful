@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
@@ -7,20 +7,13 @@ import ApiContext from '../ApiContext'
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
 
-export default class NoteListMain extends React.Component {
-
-  static defaultProps = {
-    match: {
-      params: {}
-    }
-  }
-  static contextType = ApiContext
+export default class NoteListMain extends Component {
+  static contextType = ApiContext;
 
   render() {
-    const { folder_id } = this.props.match.params
+    const { id } = this.props.match.params
     const { notes=[] } = this.context
-    
-    const notesForFolder = getNotesForFolder(notes, folder_id)
+    const notesForFolder = getNotesForFolder(notes, id)
     return (
       <section className='NoteListMain'>
         <ul>
@@ -30,7 +23,6 @@ export default class NoteListMain extends React.Component {
                 id={note.id}
                 name={note.name}
                 modified={note.modified}
-                onDeleteNote={this.onDeleteNote}
               />
             </li>
           )}
